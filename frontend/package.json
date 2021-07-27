@@ -1,0 +1,19 @@
+{
+  "name": "cook-up-out-front",
+  "version": "0.0.1",
+  "description": "Cook-up Shop Web App",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lateNightJava/cook-up-shop.git"
+  },
+  "author": "lateNightJava (Mark Martinez)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lateNightJava/cook-up-shop/issues"
+  },
+  "homepage": "https://github.com/lateNightJava/cook-up-shop#readme"
+}
