@@ -38,8 +38,8 @@ module.exports = {
           'sass-loader',
         ],
       },
-    ], 
-  },  
+    ],
+  },
   plugins: [
     new HTMLWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
@@ -51,4 +51,4 @@ module.exports = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
-}
+};
