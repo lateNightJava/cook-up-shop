@@ -1,8 +1,8 @@
 /*** CREATE ***/ 
 exports.CREATE_USER = `
 INSERT INTO 
-  users(first_name, last_name, producer_name, email, password_hash, created_at, updated_at)
-VALUES ($1, $2, $3, $4, $5, CURRENT_TIMESTAMP(3), CURRENT_TIMESTAMP(3))
+  users(id, first_name, last_name, producer_name, email, password_hash, created_at, updated_at)
+VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5, CURRENT_TIMESTAMP(3), CURRENT_TIMESTAMP(3))
 RETURNING *;
 `;
 

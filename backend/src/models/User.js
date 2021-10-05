@@ -1,28 +1,47 @@
 const db = require('../db');
 const { generatePasswordHash } = require('../util/auth');
-const { UsersQuery } = require('../queries');
+const { UsersQuery, ExtensionsQuery } = require('../queries');
 
 class User {
-  constructor (params) {
-    const { 
-      id = null,
-      firstName = null,
-      lastName = null,
-      producerName = null,
-      email = null,
-      passwordHash = null,
-      createdAt = null,
-      updatedAt = null,
-    } = params;
+  constructor (params = {}) {
+    // super({ 
+    //   keys: { 
+    //     pk: null,
+    //     id: null,
+    //     firstName: null,
+    //     lastName: null,
+    //     producerName: null,
+    //     email: null,
+    //     passwordHash: null,
+    //     createdAt: null,
+    //     updatedAt: null
+    //   },
+    //   callback: this[key] = params[key] || null,
+    //   params,
+    // })
+    // const { 
+    //   pk = null,
+    //   id = null,
+    //   firstName = null,
+    //   lastName = null,
+    //   producerName = null,
+    //   email = null,
+    //   passwordHash = null,
+    //   createdAt = null,
+    //   updatedAt = null,
+    // } = params;
 
-    this.id = id;
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.producerName = producerName;
-    this.email = email;
-    this.passwordHash = passwordHash;
-    this.createdAt = createdAt;
-    this.updatedAt = updatedAt;
+    // this.pk = pk;
+    // this.id = id;
+    // this.firstName = firstName;
+    // this.lastName = lastName;
+    // this.producerName = producerName;
+    // this.email = email;
+    // this.passwordHash = passwordHash;
+    // this.createdAt = createdAt;
+    // this.updatedAt = updatedAt;
+
+    Object.keys(params).forEach(key => this[key] = params[key] || null);
   }
 
   static async find(params) {
@@ -42,14 +61,17 @@ class User {
     return new User(userData);
   }
 
-  async create(params) {
-    const { firstName, lastName, producerName, email } = params;
-    const passwordHash = await generatePasswordHash(params.password);
+  static async create(params) {
+    const { firstName, lastName, producerName, email, password } = params;
+    const passwordHash = await generatePasswordHash(password);
 
-    const dbUser = await db.query(UsersQuery.CREATE_USER, [firstName, lastName, producerName, email, passwordHash]);
-    console.log(dbUser);
+    await db.query(ExtensionsQuery.UUID_OSSP);
+    const rowData = await db.query(UsersQuery.CREATE_USER, [firstName, lastName, producerName, email, passwordHash]);
+    console.log(rowData);
+    const userData = rowData.parsedRows[0];
+    console.log('userData =', userData);
     
-    return new User(params);
+    return new User(userData);
   }
 
   update(params) {
@@ -62,6 +84,7 @@ class User {
 
   toJsonRes() {
     return { 
+      id: this.id,
       firstName: this.firstName, 
       lastName: this.lastName, 
       producerName: this.producerName, 
@@ -71,7 +94,7 @@ class User {
     };
   }
 
-  toTable() {
+  toTableRow() {
     return { 
       first_name: this.firstName, 
       last_name: this.lastName, 
