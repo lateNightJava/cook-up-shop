@@ -13,10 +13,7 @@ module.exports = {
   query: async (sql, params) => {
     const result = await pool.query(sql, params);
 
-    return {
-      rawRows: result.rows,
-      parsedRows: dataParser.tableRowsToObjRows(result.rows),
-    };
+    return dataParser.parseTableRows(result.rows);
   },
   transaction: async (sql, params) => {
     const client = await pool.connect();

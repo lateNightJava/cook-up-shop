@@ -1,7 +1,9 @@
 const { snakeToCamel } = require('./case');
 
-exports.tableRowsToObjRows = rows => {
-  return rows.map(row => {
+exports.parseTableRows = rows => {
+  const result = { tableRows: rows };
+
+  result.parsedRows = rows.map(row => {
     const parsedRow = {};
 
     Object.keys(row).map(key => {
@@ -11,4 +13,6 @@ exports.tableRowsToObjRows = rows => {
 
     return parsedRow;
   });
+
+  return result;
 };
