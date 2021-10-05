@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/lateNightJava/cook-up-shop#readme",
   "dependencies": {
+    "argon2": "^0.28.2",
     "express": "^4.17.1",
     "pg": "^8.7.1"
   },
