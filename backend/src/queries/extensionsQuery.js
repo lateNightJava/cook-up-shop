@@ -1,0 +1,1 @@
+exports.UUID_OSSP = `CREATE EXTENSION IF NOT EXISTS "uuid-ossp";`;
