@@ -1,0 +1,1 @@
+exports.UsersQuery = require('./usersQuery');
