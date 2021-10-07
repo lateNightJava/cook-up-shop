@@ -12,6 +12,7 @@ exports.login = async (req, res, next) => {
     }
 
     const session = await Session.create(user);
+    console.log(session);
 
     return res.status(200).send(user.toJsonRes());
   } catch(err) {
