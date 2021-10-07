@@ -5,7 +5,7 @@ exports.create = async (req, res, next) => {
     console.log('req.body = ', req.body);
     let user = await User.find(req.body);
     console.log('user =', user);
-    if (user.id) {
+    if (user.userId) {
       return res.status(400).send({ errorMessage: 'Unable to create account.' });
     }
   

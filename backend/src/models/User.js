@@ -1,5 +1,5 @@
 const db = require('../db');
-const { generatePasswordHash } = require('../util/auth');
+const { generatePasswordHash, verifyPassword } = require('../util/auth');
 const { UsersQuery, ExtensionsQuery } = require('../queries');
 
 class User {
@@ -45,11 +45,11 @@ class User {
   }
 
   static async find(params) {
-    const { id, email } = params;
+    const { userId, email } = params;
     let rowData;
 
-    if (id) {
-      rowData = await db.query(UsersQuery.FIND_USER_BY_ID, [id]);
+    if (userId) {
+      rowData = await db.query(UsersQuery.FIND_USER_BY_ID, [userId]);
     } else if (email) {
       rowData = await db.query(UsersQuery.FIND_USER_BY_EMAIL, [email]);
     }
@@ -74,6 +74,10 @@ class User {
     return new User(userData);
   }
 
+  verifyPassword({ password }) {
+    return verifyPassword(this.passwordHash, password);
+  }
+
   update(params) {
   
   }
@@ -84,7 +88,7 @@ class User {
 
   toJsonRes() {
     return { 
-      id: this.id,
+      userId: this.userId,
       firstName: this.firstName, 
       lastName: this.lastName, 
       producerName: this.producerName, 
