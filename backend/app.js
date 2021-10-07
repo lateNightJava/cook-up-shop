@@ -1,5 +1,5 @@
 const express = require('express');
-const { UsersRouter } = require('./src/routes');
+const { UsersRouter, AuthRouter } = require('./src/routes');
 const errorHandler = require('./src/errors');
 
 const app = express();
@@ -9,6 +9,7 @@ app.use(express.json());
 
 // app routes
 app.use('/users', UsersRouter);
+app.use('/auth', AuthRouter);
 
 app.get('/', async (req, res) => {
   return res.send('Cook it up!');

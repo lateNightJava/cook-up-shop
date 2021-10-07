@@ -1,1 +1,2 @@
-exports.UsersRouter = require('./usersRouter')
+exports.UsersRouter = require('./usersRouter');
+exports.AuthRouter = require('./authRouter');
