@@ -1,16 +1,19 @@
- const defaultState = {
+import { CLOSE_MODAL, OPEN_MODAL } from '../../actions/modalActions';
+
+const defaultState = {
+  modalOpen: false,
   signIn: false,
   signUp: false,
 };
 
-
 const modalsReducer = (prevState = defaultState, action) => {
-  Object.freeze(prevState);
-  const newState = { ...prevState };
-
   switch(action.type) {
+    case CLOSE_MODAL: 
+      return defaultState;
+    case OPEN_MODAL:
+      return { ...defaultState, ...action.payload, modalOpen: true };
     default:
-      return newState;
+      return prevState;
   }
 };
 

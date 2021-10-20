@@ -1,20 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-import AuthModal from './Components/AuthModal/AuthModal';
+import Modal from './Components/Modal/Modal';
 import TopNavBar from './Components/TopNavBar/TopNavBar';
 import AppRouter from './AppRouter';
 import Footer from './Components/Footer/Footer';
 
 import './App.scss';
 
-const App = () => {
-
-  const modalOpen = true;
-
+const App = props => {
   return (
     <>
-      <AuthModal />
-      <div className={`app ${modalOpen ? 'blur' : ''}`}>
+      <Modal />
+      <div className={`app ${props.modalOpen ? 'app-blur' : ''}`}>
         <TopNavBar />
         <AppRouter />
         <Footer />
@@ -23,4 +21,10 @@ const App = () => {
   );
 };
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    modalOpen: state.ui.modals.modalOpen,
+  };
+};
+
+export default connect(mapStateToProps)(App);

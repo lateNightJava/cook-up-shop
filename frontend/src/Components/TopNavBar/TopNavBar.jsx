@@ -1,10 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import SearchBar from '../SearchBar/SearchBar';
 
+import { openModal } from '../../actions/modalActions';
+
 import './TopNavBar.scss';
 
-const TopNavBar = () => {
+const TopNavBar = props => {
   return (
     <nav className="top-nav-bar">
       <section className="top-nav-bar-left">
@@ -15,11 +18,15 @@ const TopNavBar = () => {
       </section>
       <section className="top-nav-bar-right">
         {/* <AcountNav /> */}
-        <button onClick={() => console.log('clicked sign in')}>Sign In</button>
-        <button onClick={() => console.log('clicked sign up')}>Sign Up</button>
+        <button onClick={() => props.openModal({ signIn: true })}>Sign In</button>
+        <button onClick={() => props.openModal({ signUp: true })}>Sign Up</button>
       </section>
     </nav>
   );
 };
 
-export default TopNavBar;
+const mapDispatchToProps = {
+  openModal,
+};
+
+export default connect(null, mapDispatchToProps)(TopNavBar);
