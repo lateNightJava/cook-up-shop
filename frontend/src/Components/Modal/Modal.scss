@@ -8,8 +8,40 @@
   height: 100%;
   background-color: none;
   background-color: rgba(0,0,0,0.2);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-show {
-  display: block;
+  display: flex;
+}
+
+.modal-close-button {
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  right: 13px;
+  top: 13px;
+  border: 1px solid #EEEEEE;
+  border-radius: 3px 10px 3px 10px;
+  padding: 5px;
+  transition: all 0.19s;
+}
+
+.modal-close-button:hover {
+  cursor: pointer;
+  color: #DDDDDD;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px 3px 3px 3px;
+  // transition: none;
+}
+
+.modal-close-button:active {
+  color: #999999;
+  border: 1px solid #999999;
+  border-radius: 10px 3px 10px 3px;
+}
+
+.modal-close-button-x {
+  padding-left: 7px;
 }

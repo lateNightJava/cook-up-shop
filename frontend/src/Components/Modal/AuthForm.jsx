@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
-import connect from 'react-redux';
+import { connect } from 'react-redux';
 
-const AuthForm = () => {
+import { signUp } from '../../actions/authActions';
+
+import './AuthForm.scss';
+
+const AuthForm = props => {
   const [formValues, setFormValues] = useState({
     email: '',
     password: '',
@@ -47,10 +51,12 @@ const AuthForm = () => {
 
     if (validateForm()) {
       console.log('Form submitted');
+      debugger
+      const x = 2;
+      return props.signUp(formValues);
     } else {
       console.log('Form invalid');
     }
-
   };
 
   return (
@@ -61,24 +67,33 @@ const AuthForm = () => {
         autoComplete="new-username"
         name="email" 
         onChange={handleInputChange} 
-        value={formValues.email} />
+        value={formValues.email} 
+      />
       <input 
         type="password"
         placeholder="Password"
         autoComplete="new-password"
         name="password"
         onChange={handleInputChange} 
-        value={formValues.password} />
+        value={formValues.password} 
+      />
       <input 
         type="password" 
         placeholder="Confirm Password"
         autoComplete="new-password"
         name="passwordConfirmation" 
         onChange={handleInputChange} 
-        value={formValues.passwordConfirmation} />
+        value={formValues.passwordConfirmation} 
+      />
       <button type="submit">Let's Go</button>
     </form>
   );
 };
 
-export default AuthForm;
+
+const mapDispatchToProps = {
+  signUp,
+};
+
+
+export default connect(null, mapDispatchToProps)(AuthForm);

@@ -13,10 +13,17 @@ const Modal = props => {
   if (props.modals.signIn || props.modals.signUp) shownModal = <AuthForm />;
   else return null;
 
-
   return (
     <div className="modal modal-show">
-      <button onClick={props.closeModal}>Close Modal</button>
+      <button 
+        type="button"
+        aria-label="Close"
+        className="modal-close-button" 
+        onClick={props.closeModal}
+      >
+        close
+        <span className="modal-close-button-x" aria-hidden="true">x</span>
+      </button>
       {shownModal}
     </div>
   );

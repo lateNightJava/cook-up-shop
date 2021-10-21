@@ -18,8 +18,8 @@ const TopNavBar = props => {
       </section>
       <section className="top-nav-bar-right">
         {/* <AcountNav /> */}
-        <button onClick={() => props.openModal({ signIn: true })}>Sign In</button>
-        <button onClick={() => props.openModal({ signUp: true })}>Sign Up</button>
+        <button onClick={() => props.openModal({ signIn: true })}>sign in</button>
+        <button onClick={() => props.openModal({ signUp: true })}>sign up</button>
       </section>
     </nav>
   );
