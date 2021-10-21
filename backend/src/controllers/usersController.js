@@ -6,7 +6,8 @@ exports.create = async (req, res, next) => {
     let user = await User.find(req.body);
     console.log('user =', user);
     if (user.userId) {
-      return res.status(400).send({ errorMessage: 'Unable to create account.' });
+      console.log('a user already exists');
+      return res.status(400).send({ message: 'Unable to create account.' });
     }
   
     user = await User.create(req.body);
@@ -14,6 +15,7 @@ exports.create = async (req, res, next) => {
   
     return res.status(200).send(user.toJsonRes());
   } catch (err) {
+    console.log('err in user create', err);
     next(err);
   }
 };
