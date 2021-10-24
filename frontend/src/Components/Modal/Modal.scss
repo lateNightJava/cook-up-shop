@@ -38,8 +38,9 @@
 
 .modal-close-button:active {
   color: #999999;
-  border: 1px solid #999999;
+  border: 1px solid #666666;
   border-radius: 10px 3px 10px 3px;
+  transition: 0.1s;
 }
 
 .modal-close-button-x {

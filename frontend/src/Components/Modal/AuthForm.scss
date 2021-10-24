@@ -1,0 +1,63 @@
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .text-input-wrapper {
+    position: relative;
+  }
+
+  input {
+    border: 1px solid white;
+    border-radius: 7px 3px 3px 7px;
+    padding: 7px;
+    margin-bottom: 13px;
+    transition: all 1s;
+  }
+
+  .text-input-has-error {
+    border: 1px dashed red;
+  }
+
+  .text-input-error {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: -8px;
+    left: 12px;
+    font-size: 10px;
+    background: #4C769D;
+    background: red;
+    padding: 0px 5px 3px 5px;
+    border-radius: 5px;
+    text-align: center;
+    opacity: 0;
+    transition: all 0.7s;
+  }
+
+  .text-input-error-active {
+    opacity: 1;
+  }
+
+  button {
+    border: 1px solid #EEEEEE;
+    border-radius: 3px 10px 3px 10px;
+    padding: 5px;
+    transition: all 0.19s;
+    width: 90px;
+  }
+
+  button:hover {
+    cursor: pointer;
+    color: #DDDDDD;
+    border: 1px solid #CCCCCC;
+    border-radius: 3px 3px 3px 3px;
+  }
+  
+  button:active {
+    color: #999999;
+    border: 1px solid #666666;
+    border-radius: 10px 3px 10px 3px;
+    transition: 0.1s;
+  }
+}

@@ -34,14 +34,22 @@ const AuthForm = props => {
 
     if (!formValues.email.trim()) {
       isValid = false;
-      errorsToSet.email = 'Email is required.';
+      errorsToSet.email = 'required';
     }
-    if (formValues.password !== formValues.passwordConfirmation) {
+    if (!formValues.password) {
       isValid = false;
-      errorsToSet.password = 'Passwords must match.';
+      errorsToSet.password = 'required';
     }
 
-    setFormInputErrors({ ...formInputErrors, ...errorsToSet });
+    if (!formValues.password && !formValues.passwordConfirmation && false) {
+      isValid = false;
+      errorsToSet.passwordConfirmation = 'required';
+    } else if (!formValues.passwordConfirmation || formValues.password !== formValues.passwordConfirmation) {
+      isValid = false;
+      errorsToSet.passwordConfirmation = 'confirm password';
+    }
+
+    setFormInputErrors({ ...errorsToSet });
 
     return isValid;
   };
@@ -60,32 +68,45 @@ const AuthForm = props => {
   };
 
   return (
-    <form onSubmit={handleFormSubmission}>
-      <input 
-        type="text" 
-        placeholder="Email"
-        autoComplete="new-username"
-        name="email" 
-        onChange={handleInputChange} 
-        value={formValues.email} 
-      />
-      <input 
-        type="password"
-        placeholder="Password"
-        autoComplete="new-password"
-        name="password"
-        onChange={handleInputChange} 
-        value={formValues.password} 
-      />
-      <input 
-        type="password" 
-        placeholder="Confirm Password"
-        autoComplete="new-password"
-        name="passwordConfirmation" 
-        onChange={handleInputChange} 
-        value={formValues.passwordConfirmation} 
-      />
-      <button type="submit">Let's Go</button>
+    <form className="auth-form" onSubmit={handleFormSubmission}>
+      <div className="text-input-wrapper">
+        <input 
+          type="text"
+          className={`${formInputErrors.email ? 'text-input-has-error' : ''}`}
+          placeholder="Email"
+          autoComplete="new-username"
+          name="email" 
+          onChange={handleInputChange} 
+          value={formValues.email} 
+        />
+        <span className={`text-input-error ${formInputErrors.email ? 'text-input-error-active' : ''}`}>{formInputErrors.email || 'required'}</span>
+      </div>
+      <div className="text-input-wrapper">
+        <input 
+          type="password"
+          className={`${formInputErrors.password ? 'text-input-has-error' : ''}`}
+          placeholder="Password"
+          autoComplete="new-password"
+          name="password"
+          onChange={handleInputChange} 
+          value={formValues.password} 
+        />
+        <span className={`text-input-error ${formInputErrors.password ? 'text-input-error-active' : ''}`}>{formInputErrors.password || 'required'}</span>
+      </div>
+      <div className="text-input-wrapper">
+        <input 
+          type="password" 
+          className={`${formInputErrors.passwordConfirmation ? 'text-input-has-error' : ''}`}
+          placeholder="Confirm Password"
+          autoComplete="new-password"
+          name="passwordConfirmation" 
+          onChange={handleInputChange} 
+          value={formValues.passwordConfirmation} 
+        />
+        <span className={`text-input-error ${formInputErrors.passwordConfirmation ? 'text-input-error-active' : ''}`}>{formInputErrors.passwordConfirmation || 'passwords must match'}</span>
+      </div>
+
+      <button type="submit">let's go</button>
     </form>
   );
 };
