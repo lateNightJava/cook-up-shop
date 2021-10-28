@@ -1,7 +1,13 @@
 .auth-form {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid #EEEEEE;
+  padding: 80px 60px;
+  border-radius: 20%;
+  background: lightblue;
+  background: rgba(173,216,230, 0.2);
 
   .text-input-wrapper {
     position: relative;
@@ -17,6 +23,19 @@
 
   .text-input-has-error {
     border: 1px dashed red;
+
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: red;
+      opacity: 1; /* Firefox */
+    }
+    
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      color: red;
+    }
+    
+    ::-ms-input-placeholder { /* Microsoft Edge */
+      color: red;
+    }
   }
 
   .text-input-error {
@@ -60,4 +79,8 @@
     border-radius: 10px 3px 10px 3px;
     transition: 0.1s;
   }
+
+
+  
 }
+

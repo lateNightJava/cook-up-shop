@@ -103,7 +103,7 @@ const AuthForm = props => {
           onChange={handleInputChange} 
           value={formValues.passwordConfirmation} 
         />
-        <span className={`text-input-error ${formInputErrors.passwordConfirmation ? 'text-input-error-active' : ''}`}>{formInputErrors.passwordConfirmation || 'passwords must match'}</span>
+        <span className={`text-input-error ${formInputErrors.passwordConfirmation ? 'text-input-error-active' : ''}`}>{formInputErrors.passwordConfirmation || 'confirm password'}</span>
       </div>
 
       <button type="submit">let's go</button>

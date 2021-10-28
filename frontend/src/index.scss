@@ -4,6 +4,7 @@
 *:where(:not(iframe, canvas, img, svg, video):not(svg *)) {
   all: unset;
   display: revert;
+  margin: 0;
 }
 
 /* Preferred box-sizing value */
@@ -38,6 +39,8 @@ textarea {
 
 html, body {
   height: 100%;
+  width: 100%;
+  margin: 0;
   font-family: 'Roboto Mono', monospace;
   color: #003330;
   color: #FFFFFF;
@@ -52,4 +55,5 @@ html {
 
 #root {
   height: 100%;
+  width: 100%;
 }
