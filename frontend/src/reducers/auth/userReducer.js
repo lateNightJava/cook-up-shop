@@ -1,7 +1,7 @@
 import { SIGN_IN_USER, SIGN_OUT_USER } from '../../actions/authActions';
 
 const defaultState = {
-  id: null,
+  userId: null,
 };
 
 const userReducer = (prevState = defaultState, action) => {

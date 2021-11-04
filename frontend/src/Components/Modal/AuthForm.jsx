@@ -14,6 +14,7 @@ const AuthForm = props => {
   const [formInputErrors, setFormInputErrors] = useState({
     email: '',
     password: '',
+    passwordConfirmation: '',
   });
 
   const handleInputChange = e => {
@@ -59,8 +60,6 @@ const AuthForm = props => {
 
     if (validateForm()) {
       console.log('Form submitted');
-      debugger
-      const x = 2;
       return props.signUp(formValues);
     } else {
       console.log('Form invalid');
@@ -69,11 +68,12 @@ const AuthForm = props => {
 
   return (
     <form className="auth-form" onSubmit={handleFormSubmission}>
+      <div className={`auth-form-error ${props.authErrorMessage ? 'auth-form-has-error' : ''}`}>{props.authErrorMessage}</div>
       <div className="text-input-wrapper">
         <input 
           type="text"
           className={`${formInputErrors.email ? 'text-input-has-error' : ''}`}
-          placeholder="Email"
+          placeholder="email"
           autoComplete="new-username"
           name="email" 
           onChange={handleInputChange} 
@@ -85,7 +85,7 @@ const AuthForm = props => {
         <input 
           type="password"
           className={`${formInputErrors.password ? 'text-input-has-error' : ''}`}
-          placeholder="Password"
+          placeholder="password"
           autoComplete="new-password"
           name="password"
           onChange={handleInputChange} 
@@ -97,7 +97,7 @@ const AuthForm = props => {
         <input 
           type="password" 
           className={`${formInputErrors.passwordConfirmation ? 'text-input-has-error' : ''}`}
-          placeholder="Confirm Password"
+          placeholder="confirm password"
           autoComplete="new-password"
           name="passwordConfirmation" 
           onChange={handleInputChange} 
@@ -111,10 +111,15 @@ const AuthForm = props => {
   );
 };
 
+const mapStateToProps = (state, ownProps) => {
+  return {
+    authErrorMessage: (state.errors.auth && state.errors.auth.message) || ownProps.authErrorMessage || '',
+  };
+};
 
 const mapDispatchToProps = {
   signUp,
 };
 
 
-export default connect(null, mapDispatchToProps)(AuthForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthForm);

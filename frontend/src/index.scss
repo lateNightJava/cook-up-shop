@@ -57,3 +57,22 @@ html {
   height: 100%;
   width: 100%;
 }
+
+::-webkit-input-placeholder {
+  /* WebKit, Blink, Edge */
+  color: darkgrey;
+}
+:-moz-placeholder {
+  /* Mozilla Firefox 4 to 18 */
+  color: darkgrey;
+  opacity: 1;
+}
+::-moz-placeholder {
+  /* Mozilla Firefox 19+ */
+  color: darkgrey;
+  opacity: 1;
+}
+:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: darkgrey;
+}
