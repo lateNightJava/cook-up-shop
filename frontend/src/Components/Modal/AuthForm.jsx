@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import { signUp } from '../../actions/authActions';
+import { signIn, signUp } from '../../actions/authActions';
 
 import './AuthForm.scss';
 
@@ -42,12 +42,14 @@ const AuthForm = props => {
       errorsToSet.password = 'required';
     }
 
-    if (!formValues.password && !formValues.passwordConfirmation && false) {
-      isValid = false;
-      errorsToSet.passwordConfirmation = 'required';
-    } else if (!formValues.passwordConfirmation || formValues.password !== formValues.passwordConfirmation) {
-      isValid = false;
-      errorsToSet.passwordConfirmation = 'confirm password';
+    if (!props.signInModal) {
+      if (!formValues.password && !formValues.passwordConfirmation && false) {
+        isValid = false;
+        errorsToSet.passwordConfirmation = 'required';
+      } else if (!formValues.passwordConfirmation || formValues.password !== formValues.passwordConfirmation) {
+        isValid = false;
+        errorsToSet.passwordConfirmation = 'confirm password';
+      }
     }
 
     setFormInputErrors({ ...errorsToSet });
@@ -60,7 +62,7 @@ const AuthForm = props => {
 
     if (validateForm()) {
       console.log('Form submitted');
-      return props.signUp(formValues);
+      return props.signInModal ? props.signIn(formValues) : props.signUp(formValues);
     } else {
       console.log('Form invalid');
     }
@@ -68,6 +70,7 @@ const AuthForm = props => {
 
   return (
     <form className="auth-form" onSubmit={handleFormSubmission}>
+      <h3 className="auth-form-title">{props.signInModal ? 'sign in' : 'create account'}</h3>
       <div className={`auth-form-error ${props.authErrorMessage ? 'auth-form-has-error' : ''}`}>{props.authErrorMessage}</div>
       <div className="text-input-wrapper">
         <input 
@@ -93,18 +96,20 @@ const AuthForm = props => {
         />
         <span className={`text-input-error ${formInputErrors.password ? 'text-input-error-active' : ''}`}>{formInputErrors.password || 'required'}</span>
       </div>
-      <div className="text-input-wrapper">
-        <input 
-          type="password" 
-          className={`${formInputErrors.passwordConfirmation ? 'text-input-has-error' : ''}`}
-          placeholder="confirm password"
-          autoComplete="new-password"
-          name="passwordConfirmation" 
-          onChange={handleInputChange} 
-          value={formValues.passwordConfirmation} 
-        />
-        <span className={`text-input-error ${formInputErrors.passwordConfirmation ? 'text-input-error-active' : ''}`}>{formInputErrors.passwordConfirmation || 'confirm password'}</span>
-      </div>
+      { !props.signInModal && (
+        <div className="text-input-wrapper">
+          <input 
+            type="password" 
+            className={`${formInputErrors.passwordConfirmation ? 'text-input-has-error' : ''}`}
+            placeholder="confirm password"
+            autoComplete="new-password"
+            name="passwordConfirmation" 
+            onChange={handleInputChange} 
+            value={formValues.passwordConfirmation} 
+          />
+          <span className={`text-input-error ${formInputErrors.passwordConfirmation ? 'text-input-error-active' : ''}`}>{formInputErrors.passwordConfirmation || 'confirm password'}</span>
+        </div>
+      ) || null}
 
       <button type="submit">let's go</button>
     </form>
@@ -113,11 +118,13 @@ const AuthForm = props => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    authErrorMessage: (state.errors.auth && state.errors.auth.message) || ownProps.authErrorMessage || '',
+    authErrorMessage: (state.errors.auth && state.errors.auth.errorMessage) || ownProps.authErrorMessage || '',
+    signInModal: state.ui.modals.signIn,
   };
 };
 
 const mapDispatchToProps = {
+  signIn,
   signUp,
 };
 

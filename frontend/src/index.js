@@ -11,6 +11,7 @@ import configureStore from './configureStore';
 import './index.scss';
 
 axios.defaults.baseURL = process.env.API_URL;
+// axios.defaults.withCredentials = true;
 
 const cookUpShopApp = (
   <Provider store={configureStore()}> 

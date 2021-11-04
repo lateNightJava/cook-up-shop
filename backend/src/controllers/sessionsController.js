@@ -11,8 +11,12 @@ exports.signIn = async (req, res, next) => {
       return res.status(401).send({ errorMessage: 'please check credentials and try again' });
     }
 
-    const session = await Session.create(user);
+    const session = await Session.create(user, req.ip);
     console.log(session);
+
+    res.cookie(process.env.SESSION_COOKIE_NAME, session.sessionId, {
+      httpOnly: true,
+    });
 
     return res.status(200).send(user.toJsonRes());
   } catch(err) {

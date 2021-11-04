@@ -4,11 +4,20 @@
   flex-direction: column;
   justify-content: space-between;
   border: 1px solid #EEEEEE;
-  padding: 80px 60px;
+  padding: 60px 60px 80px 60px;
   border-radius: 20%;
   background: lightblue;
   background: rgba(173,216,230, 0.2);
   color: white;
+
+  .auth-form-title {
+    // position: absolute;
+    // top: 40px;
+    // left: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+    
+  }
 
   .text-input-wrapper {
     position: relative;

@@ -28,3 +28,21 @@ export const signUp = data => {
     }
   };
 };
+
+export const signIn = data => {
+  return async dispatch => {
+    try {
+      const response = await AuthApi.signIn(data);
+
+      dispatch(addUser(response.data));
+      dispatch(closeModal());
+
+      return response;
+    } catch (error) {
+      console.log(error.response.data);
+      dispatch(addError(error.response.data, 'auth'));
+
+      return error;
+    }
+  };
+};

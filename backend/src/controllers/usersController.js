@@ -17,7 +17,7 @@ exports.create = async (req, res, next) => {
 
     res.cookie(process.env.SESSION_COOKIE_NAME, session.sessionId, { 
       httpOnly: true,
-
+      domain: 'something.localhost',
     });
   
     return res.status(200).send(user.toJsonRes());
