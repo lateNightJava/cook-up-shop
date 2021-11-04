@@ -2,13 +2,13 @@ const { User, Session } = require('../models');
 const { verifyPassword } = require('../util/auth');
 
 
-exports.login = async (req, res, next) => {
+exports.signIn = async (req, res, next) => {
   try {
     console.log('req.body =', req.body);
     const user = await User.find(req.body);
     console.log('user =', user);
     if (!user.userId || !(await user.verifyPassword(req.body))) {
-      return res.status(401).send({ errorMessage: 'Please check credentials and try again.' });
+      return res.status(401).send({ errorMessage: 'please check credentials and try again' });
     }
 
     const session = await Session.create(user);
@@ -18,6 +18,10 @@ exports.login = async (req, res, next) => {
   } catch(err) {
     return next(err);
   }
+};
+
+exports.signOut = async (req, res, next) => {
+
 };
 
 

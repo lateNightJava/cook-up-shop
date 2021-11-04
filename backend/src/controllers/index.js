@@ -1,2 +1,2 @@
 exports.UsersController = require('./usersController');
-exports.AuthController = require('./authController');
+exports.SessionsController = require('./sessionsController');

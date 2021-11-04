@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Session } = require('../models');
 
 exports.create = async (req, res, next) => {
   try {
@@ -7,11 +7,18 @@ exports.create = async (req, res, next) => {
     console.log('user =', user);
     if (user.userId) {
       console.log('a user already exists');
-      return res.status(400).send({ message: 'Unable to create account.' });
+      return res.status(400).send({ message: 'unable to create account' });
     }
   
     user = await User.create(req.body);
     console.log(user);
+    const session = await Session.create(user, req.ip);
+    console.log(session);
+
+    res.cookie(process.env.SESSION_COOKIE_NAME, session.sessionId, { 
+      httpOnly: true,
+
+    });
   
     return res.status(200).send(user.toJsonRes());
   } catch (err) {
